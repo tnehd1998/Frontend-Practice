@@ -1,0 +1,33 @@
+.logo {
+  color: burlywood;
+  text-align: center;
+  font-size: 1.75em;
+  margin: auto;
+}
+
+.container {
+  display: flex;
+  padding: 2em;
+}
+
+.component {
+  border: 1px solid burlywood;
+  margin: 1em;
+}
+
+.title {
+  background-color: burlywood;
+  font-size: 1.5rem;
+  padding: 1em;
+}
+
+.content {
+  font-size: 1.125rem;
+  padding: 1em;
+}
+
+@media screen and (max-width: 48rem) {
+  .container {
+    flex-direction: column;
+  }
+}
