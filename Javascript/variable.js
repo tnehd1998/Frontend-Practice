@@ -2,8 +2,7 @@
 // VanillaJS를 사용할 때 상식적인 에러를 잡아주는 기능
 "use strict";
 
-// Variable : 데이터 타입
-
+// Variable : 데이터 타입, rw(read/write)
 // 1. let (added in ES6) : 변수형 데이터 타입
 let globalName = "global name";
 {
@@ -38,13 +37,21 @@ console.log(year);
 // var은 이런 말도 안되는 코드들도 실행이 되버림
 // let대신 var을 큰 프로그램에서 사용하면 답이 없어짐
 
-// 3. const : 상수형 데이터 타입
+// 3. const : 상수형 데이터 타입 r(read only)
 // 보안상으로 좋음
 // 다중스레드 작동에 안정적임
 // 개발자의 실수를 방지해줌
 
 const daysInWeek = 7;
 const maxNumber = 5;
+
+// Note!
+// Immutable data types: primitive types, frozen objects (i.e. object.freeze())
+// Mutable data types: all objects by default are mutable in JS
+// favor immutable data type always for a few reasons:
+// - security
+// - thread safety
+// - reduce human mistakes
 
 // Variable types
 // 4. primitive: single item(number, string, boolean, null,
