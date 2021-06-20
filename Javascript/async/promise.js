@@ -63,9 +63,9 @@ getHen()
   //.then((hen) => getEgg(hen))
   .then(getEgg)
   //.then((egg) => cook(egg))
-  .catch((error) => {
-    return "🥖";
-  })
+  //   .catch((error) => {
+  //     return "🥖";
+  //   })
   .then(cook)
   //.then((meal) => console.log(meal));
   .then(console.log)
