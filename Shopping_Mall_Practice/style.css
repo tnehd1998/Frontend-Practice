@@ -1,0 +1,63 @@
+a {
+  text-decoration: none;
+  color: black;
+}
+
+img {
+  padding: 10px;
+  height: 4rem;
+}
+
+.shopping_mall {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 0px;
+  background-color: #3f454e;
+  height: 220vh;
+  width: 100vw;
+}
+
+.shopping_mall_icon img {
+  height: 8rem;
+}
+
+.shopping_mall_category {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.blue,
+.yellow,
+.pink {
+  width: 100px;
+  height: 3rem;
+  border-radius: 4px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.blue {
+  background-color: #3a81b6;
+}
+
+.yellow {
+  background-color: #f8bf37;
+}
+
+.pink {
+  background-color: #ef8784;
+}
+.shopping_mall_product {
+  width: 70vw;
+  display: flex;
+  align-items: center;
+  background-color: #fcffff;
+  border-radius: 4px;
+  padding: 0px 10px;
+  margin-bottom: 10px;
+}
