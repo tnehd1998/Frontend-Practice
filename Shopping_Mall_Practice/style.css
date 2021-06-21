@@ -8,6 +8,10 @@ img {
   height: 4rem;
 }
 
+img:hover {
+  height: 4.5rem;
+}
+
 .shopping_mall {
   display: flex;
   flex-direction: column;
@@ -26,19 +30,27 @@ img {
   display: flex;
   align-items: center;
   text-align: center;
+  height: 6rem;
 }
 
 .blue,
 .yellow,
 .pink {
-  width: 100px;
+  width: 6rem;
   height: 3rem;
   border-radius: 4px;
   color: black;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 10px;
+  margin: 0px 5px;
+}
+
+.blue:hover,
+.yellow:hover,
+.pink:hover {
+  width: 6.5rem;
+  height: 3.5rem;
 }
 
 .blue {
@@ -52,6 +64,7 @@ img {
 .pink {
   background-color: #ef8784;
 }
+
 .shopping_mall_product {
   width: 70vw;
   display: flex;
