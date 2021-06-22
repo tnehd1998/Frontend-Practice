@@ -31,36 +31,34 @@ const product_array = [
   new Product("pink_s", "female", "small size", "skirt", "pink"),
 ];
 
-function init(choice) {
+function showProduct(choice) {
   const shopping_mall_products = document.querySelector(
     ".shopping_mall_products"
   );
+
   const shopping_mall_existingProduct = document.createElement("div");
   shopping_mall_existingProduct.className = "shopping_mall_existingProduct";
   shopping_mall_products.appendChild(shopping_mall_existingProduct);
   for (let product of product_array) {
     const newDiv = document.createElement("div");
+
     newDiv.className = "shopping_mall_product";
-    newDiv.innerHTML = `<img src="imgs/${product.img}.png" />\n<p>${product.gender}, ${product.size}</p>`;
+    newDiv.innerHTML = `
+    <img src="imgs/${product.img}.png" />
+    <p>${product.gender}, ${product.size}</p>
+    `;
     shopping_mall_existingProduct.appendChild(newDiv);
+
     switch (choice) {
       case "t-shirt":
-        if (product.type !== "t-shirt") newDiv.remove();
-        break;
       case "pants":
-        if (product.type !== "pants") newDiv.remove();
-        break;
       case "skirt":
-        if (product.type !== "skirt") newDiv.remove();
+        if (product.type !== choice) newDiv.remove();
         break;
       case "blue":
-        if (product.color !== "blue") newDiv.remove();
-        break;
       case "yellow":
-        if (product.color !== "yellow") newDiv.remove();
-        break;
       case "pink":
-        if (product.color !== "pink") newDiv.remove();
+        if (product.color !== choice) newDiv.remove();
         break;
     }
   }
@@ -73,7 +71,7 @@ function clearPage() {
   existingProduct.remove();
 }
 
-init();
+showProduct();
 
 const main_icon = document.querySelector(".main_icon");
 
@@ -86,30 +84,30 @@ const choice6 = document.querySelector(".pink");
 
 main_icon.addEventListener("click", () => {
   clearPage();
-  init();
+  showProduct();
 });
 
 choice1.addEventListener("click", () => {
   clearPage();
-  init("t-shirt");
+  showProduct("t-shirt");
 });
 choice2.addEventListener("click", () => {
   clearPage();
-  init("pants");
+  showProduct("pants");
 });
 choice3.addEventListener("click", () => {
   clearPage();
-  init("skirt");
+  showProduct("skirt");
 });
 choice4.addEventListener("click", () => {
   clearPage();
-  init("blue");
+  showProduct("blue");
 });
 choice5.addEventListener("click", () => {
   clearPage();
-  init("yellow");
+  showProduct("yellow");
 });
 choice6.addEventListener("click", () => {
   clearPage();
-  init("pink");
+  showProduct("pink");
 });
