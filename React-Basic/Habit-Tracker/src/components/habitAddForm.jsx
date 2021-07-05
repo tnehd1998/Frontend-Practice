@@ -8,7 +8,6 @@ class HabitAddForm extends PureComponent {
     event.preventDefault();
     const name = this.inputRef.current.value;
     name && this.props.onAdd(name);
-    //this.inputRef.current.value = "";
     this.formRef.current.reset();
   };
 
