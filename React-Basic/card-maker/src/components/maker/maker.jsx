@@ -9,46 +9,22 @@ import Preview from "../preview/preview";
 const Maker = ({ FileInput, authService, cardRepository }) => {
   const history = useHistory();
   const historyState = history?.location?.state;
-  const [cards, setCards] = useState({
-    // 1: {
-    //   id: "1",
-    //   name: "Billy",
-    //   company: "Naver",
-    //   theme: "dark",
-    //   title: "Software Engineer",
-    //   email: "billy@gmail.com",
-    //   message: "Hi everyone 👻",
-    //   fileName: "billy",
-    //   fileURL: null,
-    // },
-    // 2: {
-    //   id: "2",
-    //   name: "Mookie Betts",
-    //   company: "LA Dodgers",
-    //   theme: "light",
-    //   title: "MLB Right Fielder",
-    //   email: "mookie@gmail.com",
-    //   message: "MVP",
-    //   fileName: "mookie",
-    //   fileURL: null,
-    // },
-    // 3: {
-    //   id: "3",
-    //   name: "Giannis Antetokounmpo",
-    //   company: "Milwaukee Bucks",
-    //   theme: "colorful",
-    //   title: "NBA Power Forward",
-    //   email: "billy@gmail.com",
-    //   message: "GOAT",
-    //   fileName: "giannis",
-    //   fileURL: null,
-    // },
-  });
+  const [cards, setCards] = useState({});
   const [userId, setUserId] = useState(historyState && historyState.id);
 
   const onLogout = () => {
     authService.logout();
   };
+
+  useEffect(() => {
+    if (!userId) {
+      return;
+    }
+    const stopSync = cardRepository.syncCards(userId, (cards) => {
+      setCards(cards);
+    });
+    return () => stopSync();
+  }, [userId]);
 
   useEffect(() => {
     authService.onAuthChange((user) => {
