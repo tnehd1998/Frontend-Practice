@@ -4,7 +4,7 @@
   const scores: Array<number> = [1, 3, 4];
   function printArray(fruits: readonly string[]) {}
 
-  // Tuple
+  // Tuple: 서로 다른 타입을 넣을 때 사용
   // 굳이 사용하지 않음
   // interface, type alias, class로 대체 가능
   let student: [string, number];
