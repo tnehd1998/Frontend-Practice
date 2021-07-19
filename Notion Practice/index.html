@@ -16,13 +16,13 @@
     <header>
       <p class="header_title">Notion</p>
       <div class="header_categories">
-        <button class="header_category">IMAGE</button>
-        <button class="header_category">VIDEO</button>
-        <button class="header_category">NOTE</button>
-        <button class="header_category">TASK</button>
+        <button class="header_category imageBtn">IMAGE</button>
+        <button class="header_category videoBtn">VIDEO</button>
+        <button class="header_category noteBtn">NOTE</button>
+        <button class="header_category taskBtn">TASK</button>
       </div>
     </header>
-    <section>
+    <section class="main_content">
       <ul class="content_items">
         <li class="content_item video">
           <iframe
@@ -65,6 +65,22 @@
           <i class="fas fa-times"></i>
         </li>
       </ul>
+    </section>
+    <section class="add_image_or_video add_task_hide">
+      <i class="fas fa-times closeVideoPopUp"></i>
+      <p>Title</p>
+      <input type="text" />
+      <p>URL</p>
+      <input type="text" />
+      <button>ADD</button>
+    </section>
+    <section class="add_note_or_task add_task_hide">
+      <i class="fas fa-times closeNotePopUp"></i>
+      <p>Title</p>
+      <input class="input_title" type="text" />
+      <p>Body</p>
+      <input class="input_body" type="text" />
+      <button>ADD</button>
     </section>
     <footer>
       <p class="footer_description">

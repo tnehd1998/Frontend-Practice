@@ -42,7 +42,7 @@ header {
   cursor: pointer;
 }
 
-section {
+.main_content {
   background-color: #464447;
   height: 75vh;
   overflow-y: scroll;
@@ -138,4 +138,110 @@ footer {
   align-items: center;
   height: 3.45em;
   font-size: 1em;
+}
+
+.add_image_or_video {
+  width: 500px;
+  height: 200px;
+  position: absolute;
+  top: 320px;
+  left: 470px;
+  background: rgb(101, 103, 99);
+  background: linear-gradient(
+    83deg,
+    rgba(101, 103, 99, 1) 32%,
+    rgba(44, 45, 44, 1) 75%
+  );
+  padding: 5px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  box-shadow: 5px 5px 15px 5px #000000;
+}
+
+.add_image_or_video i {
+  color: #f94238;
+  align-self: flex-end;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.add_image_or_video p {
+  font-size: 20px;
+  font-weight: 600;
+  color: #cbbd94;
+  margin: 0;
+}
+
+.add_image_or_video input {
+  height: 35px;
+  background-color: #595658;
+  margin-bottom: 5px;
+}
+
+.add_image_or_video button {
+  background-color: #f94238;
+  cursor: pointer;
+  border: none;
+  color: white;
+  width: 60px;
+  height: 30px;
+  align-self: flex-end;
+  margin-top: 5px;
+}
+
+.add_note_or_task {
+  width: 500px;
+  height: 240px;
+  position: absolute;
+  top: 320px;
+  left: 470px;
+  background: rgb(101, 103, 99);
+  background: linear-gradient(
+    83deg,
+    rgba(101, 103, 99, 1) 32%,
+    rgba(44, 45, 44, 1) 75%
+  );
+  padding: 5px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  box-shadow: 5px 5px 15px 5px #000000;
+}
+
+.add_note_or_task i {
+  color: #f94238;
+  align-self: flex-end;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.add_note_or_task p {
+  font-size: 20px;
+  font-weight: 600;
+  color: #cbbd94;
+  margin: 0;
+}
+
+.add_note_or_task input {
+  height: 50px;
+  background-color: #595658;
+  margin-bottom: 5px;
+}
+
+.add_note_or_task button {
+  background-color: #f94238;
+  cursor: pointer;
+  border: none;
+  color: white;
+  width: 60px;
+  height: 30px;
+  align-self: flex-end;
+  margin-top: 10px;
+}
+
+.add_task_hide {
+  display: none;
 }

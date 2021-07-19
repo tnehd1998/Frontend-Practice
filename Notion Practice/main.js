@@ -1,0 +1,33 @@
+var imageBtn = document.querySelector(".imageBtn");
+var videoBtn = document.querySelector(".videoBtn");
+var noteBtn = document.querySelector(".noteBtn");
+var taskBtn = document.querySelector(".taskBtn");
+var addImageOrVideo = document.querySelector(".add_image_or_video");
+var addNoteOrTask = document.querySelector(".add_note_or_task");
+var closeVideoPopUp = document.querySelector(".closeVideoPopUp");
+var closeNotePopUp = document.querySelector(".closeNotePopUp");
+var addItem;
+imageBtn === null || imageBtn === void 0 ? void 0 : imageBtn.addEventListener("click", function () { return showAddImageAndVideoPopUp("image"); });
+videoBtn === null || videoBtn === void 0 ? void 0 : videoBtn.addEventListener("click", function () { return showAddImageAndVideoPopUp("video"); });
+noteBtn === null || noteBtn === void 0 ? void 0 : noteBtn.addEventListener("click", function () { return showAddNoteAndTaskPopUp("note"); });
+taskBtn === null || taskBtn === void 0 ? void 0 : taskBtn.addEventListener("click", function () { return showAddNoteAndTaskPopUp("task"); });
+closeVideoPopUp === null || closeVideoPopUp === void 0 ? void 0 : closeVideoPopUp.addEventListener("click", function () { return hidePopUp("video"); });
+closeNotePopUp === null || closeNotePopUp === void 0 ? void 0 : closeNotePopUp.addEventListener("click", function () { return hidePopUp("note"); });
+function showAddImageAndVideoPopUp(input) {
+    addImageOrVideo === null || addImageOrVideo === void 0 ? void 0 : addImageOrVideo.classList.remove("add_task_hide");
+    addItem = input;
+}
+function showAddNoteAndTaskPopUp(input) {
+    addNoteOrTask === null || addNoteOrTask === void 0 ? void 0 : addNoteOrTask.classList.remove("add_task_hide");
+    addItem = input;
+}
+function hidePopUp(input) {
+    if (input === "video") {
+        addImageOrVideo === null || addImageOrVideo === void 0 ? void 0 : addImageOrVideo.classList.add("add_task_hide");
+        console.log(addItem);
+    }
+    else if (input === "note") {
+        addNoteOrTask === null || addNoteOrTask === void 0 ? void 0 : addNoteOrTask.classList.add("add_task_hide");
+        console.log(addItem);
+    }
+}
