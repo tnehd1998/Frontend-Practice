@@ -33,6 +33,15 @@ closeNotePopUp?.addEventListener("click", () => hidePopUp("note"));
 addVideoBtn?.addEventListener("click", () => addInputNote());
 addNoteBtn?.addEventListener("click", () => addInputNote());
 
+deleteCertainItem();
+
+function deleteCertainItem(input: string) {
+  const deleteItem = document.querySelectorAll(".delete_item");
+  for (const item of deleteItem) {
+    item.addEventListener("click", () => item.parentElement?.remove());
+  }
+}
+
 function showAddImageAndVideoPopUp(input: string) {
   addImageOrVideo?.classList.remove("add_task_hide");
   addItem = input;
@@ -70,6 +79,7 @@ function addInputNote() {
     default:
       throw new Error(`Unknown type : ${input}`);
   }
+  deleteCertainItem();
 }
 
 function addImage() {
@@ -80,7 +90,7 @@ function addImage() {
             alt="image"
         />
         <p>${inputVideoTitle.value}</p>
-        <i class="fas fa-times"></i>
+        <i class="fas fa-times delete_item"></i>
     </li>`;
   inputVideoTitle.value = "";
   inputVideoBody.value = "";
@@ -99,7 +109,7 @@ function addVideo() {
       >
       </iframe>
       <p>${inputVideoTitle.value}</p>
-      <i class="fas fa-times"></i>
+      <i class="fas fa-times delete_item"></i>
   </li>`;
   inputVideoTitle.value = "";
   inputVideoBody.value = "";
@@ -115,7 +125,7 @@ function addNote() {
                 <li>${inputNoteBody.value}</li>
             </ul>
         </div>
-        <i class="fas fa-times"></i>
+        <i class="fas fa-times delete_item"></i>
     </li>`;
   inputNoteTitle.value = "";
   inputNoteBody.value = "";
@@ -131,7 +141,7 @@ function addTask() {
                 <li>${inputNoteBody.value}</li>
             </ul>
         </div>
-        <i class="fas fa-times"></i>
+        <i class="fas fa-times delete_item"></i>
     </li>`;
   inputNoteTitle.value = "";
   inputNoteBody.value = "";

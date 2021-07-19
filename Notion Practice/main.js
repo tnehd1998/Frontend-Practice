@@ -22,6 +22,17 @@ closeVideoPopUp === null || closeVideoPopUp === void 0 ? void 0 : closeVideoPopU
 closeNotePopUp === null || closeNotePopUp === void 0 ? void 0 : closeNotePopUp.addEventListener("click", function () { return hidePopUp("note"); });
 addVideoBtn === null || addVideoBtn === void 0 ? void 0 : addVideoBtn.addEventListener("click", function () { return addInputNote(); });
 addNoteBtn === null || addNoteBtn === void 0 ? void 0 : addNoteBtn.addEventListener("click", function () { return addInputNote(); });
+deleteCertainItem();
+function deleteCertainItem(input) {
+    var deleteItem = document.querySelectorAll(".delete_item");
+    var _loop_1 = function (item) {
+        item.addEventListener("click", function () { var _a; return (_a = item.parentElement) === null || _a === void 0 ? void 0 : _a.remove(); });
+    };
+    for (var _i = 0, deleteItem_1 = deleteItem; _i < deleteItem_1.length; _i++) {
+        var item = deleteItem_1[_i];
+        _loop_1(item);
+    }
+}
 function showAddImageAndVideoPopUp(input) {
     addImageOrVideo === null || addImageOrVideo === void 0 ? void 0 : addImageOrVideo.classList.remove("add_task_hide");
     addItem = input;
@@ -57,27 +68,28 @@ function addInputNote() {
         default:
             throw new Error("Unknown type : " + input);
     }
+    deleteCertainItem();
 }
 function addImage() {
-    contentItems === null || contentItems === void 0 ? void 0 : contentItems.innerHTML += "\n    <li class=\"content_item image\">\n        <img\n            src=\"" + inputVideoBody.value + "\"\n            alt=\"image\"\n        />\n        <p>" + inputVideoTitle.value + "</p>\n        <i class=\"fas fa-times\"></i>\n    </li>";
+    contentItems === null || contentItems === void 0 ? void 0 : contentItems.innerHTML += "\n    <li class=\"content_item image\">\n        <img\n            src=\"" + inputVideoBody.value + "\"\n            alt=\"image\"\n        />\n        <p>" + inputVideoTitle.value + "</p>\n        <i class=\"fas fa-times delete_item\"></i>\n    </li>";
     inputVideoTitle.value = "";
     inputVideoBody.value = "";
     addImageOrVideo === null || addImageOrVideo === void 0 ? void 0 : addImageOrVideo.classList.add("add_task_hide");
 }
 function addVideo() {
-    contentItems === null || contentItems === void 0 ? void 0 : contentItems.innerHTML += "\n    <li class=\"content_item video\">\n      <iframe\n          width=\"560\"\n          height=\"315\"\n          src=\"" + inputVideoBody.value + "\"\n          frameborder=\"0\"\n          allowfullscreen\n      >\n      </iframe>\n      <p>" + inputVideoTitle.value + "</p>\n      <i class=\"fas fa-times\"></i>\n  </li>";
+    contentItems === null || contentItems === void 0 ? void 0 : contentItems.innerHTML += "\n    <li class=\"content_item video\">\n      <iframe\n          width=\"560\"\n          height=\"315\"\n          src=\"" + inputVideoBody.value + "\"\n          frameborder=\"0\"\n          allowfullscreen\n      >\n      </iframe>\n      <p>" + inputVideoTitle.value + "</p>\n      <i class=\"fas fa-times delete_item\"></i>\n  </li>";
     inputVideoTitle.value = "";
     inputVideoBody.value = "";
     addImageOrVideo === null || addImageOrVideo === void 0 ? void 0 : addImageOrVideo.classList.add("add_task_hide");
 }
 function addNote() {
-    contentItems === null || contentItems === void 0 ? void 0 : contentItems.innerHTML += "\n    <li class=\"content_item note\">\n        <div class=\"note_content\">\n            <p>" + inputNoteTitle.value + "</p>\n            <ul>\n                <li>" + inputNoteBody.value + "</li>\n            </ul>\n        </div>\n        <i class=\"fas fa-times\"></i>\n    </li>";
+    contentItems === null || contentItems === void 0 ? void 0 : contentItems.innerHTML += "\n    <li class=\"content_item note\">\n        <div class=\"note_content\">\n            <p>" + inputNoteTitle.value + "</p>\n            <ul>\n                <li>" + inputNoteBody.value + "</li>\n            </ul>\n        </div>\n        <i class=\"fas fa-times delete_item\"></i>\n    </li>";
     inputNoteTitle.value = "";
     inputNoteBody.value = "";
     addNoteOrTask === null || addNoteOrTask === void 0 ? void 0 : addNoteOrTask.classList.add("add_task_hide");
 }
 function addTask() {
-    contentItems === null || contentItems === void 0 ? void 0 : contentItems.innerHTML += "\n    <li class=\"content_item task\">\n        <div class=\"task_content\">\n            <p>" + inputNoteTitle.value + "</p>\n            <ul>\n                <li>" + inputNoteBody.value + "</li>\n            </ul>\n        </div>\n        <i class=\"fas fa-times\"></i>\n    </li>";
+    contentItems === null || contentItems === void 0 ? void 0 : contentItems.innerHTML += "\n    <li class=\"content_item task\">\n        <div class=\"task_content\">\n            <p>" + inputNoteTitle.value + "</p>\n            <ul>\n                <li>" + inputNoteBody.value + "</li>\n            </ul>\n        </div>\n        <i class=\"fas fa-times delete_item\"></i>\n    </li>";
     inputNoteTitle.value = "";
     inputNoteBody.value = "";
     addNoteOrTask === null || addNoteOrTask === void 0 ? void 0 : addNoteOrTask.classList.add("add_task_hide");
