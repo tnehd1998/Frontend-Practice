@@ -5,7 +5,7 @@ export class VideoComponent extends BaseComponent<HTMLElement> {
     super(`
     <section class="video">
       <div class="video__player"><iframe class="video__iframe"></iframe></div>
-      <h3 class="video__title"></h3>
+      <h2 class="page-item__title video__title"></h2>
     </section>
   `);
 
