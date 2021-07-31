@@ -1,0 +1,25 @@
+.grid {
+  color: white;
+  display: grid;
+  gap: 5px;
+  height: 100vh;
+  grid-template-columns: repeat(4, 100px);
+  grid-template-rows: repeat(4, 100px);
+  place-content: end center;
+}
+
+.header {
+  background-color: teal;
+}
+
+.content {
+  background-color: tomato;
+}
+
+.nav {
+  background-color: violet;
+}
+
+.footer {
+  background-color: yellowgreen;
+}
