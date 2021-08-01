@@ -1,0 +1,5 @@
+@mixin link($word) {
+  text-decoration: none;
+  display: block;
+  color: $color;
+}
