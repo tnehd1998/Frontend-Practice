@@ -1,7 +1,4 @@
-import React from "react";
-import "./App.css";
-
-const usePreventLeave = () => {
+export const usePreventLeave = () => {
   const listener = (event) => {
     event.preventDefault();
     event.returnValue = "";
@@ -21,5 +18,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
