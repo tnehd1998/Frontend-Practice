@@ -1,33 +1,40 @@
-import React, { useEffect, useState } from "react";
+import React, { useRef } from "react";
 import "./App.css";
 
-const useNetwork = (onChange) => {
-  const [status, setStatus] = useState(navigator.onLine);
-  const handleChange = () => {
-    if (typeof onChange === "function") {
-      onChange(navigator.onLine);
+const useFullScreen = (callback) => {
+  const element = useRef();
+  const triggerFull = () => {
+    if (element.current) {
+      element.current.requestFullscreen();
+      if (callback && typeof callback === "function") {
+        callback(true);
+      }
     }
-    setStatus(navigator.onLine);
   };
-  useEffect(() => {
-    window.addEventListener("online", handleChange);
-    window.addEventListener("offline", handleChange);
-    return () => {
-      window.removeEventListener("online", handleChange);
-      window.removeEventListener("offline", handleChange);
-    };
-  }, []);
-  return status;
+  const exitFull = () => {
+    document.exitFullscreen();
+    if (callback && typeof callback === "function") {
+      callback(false);
+    }
+  };
+  return { element, triggerFull, exitFull };
 };
 
 function App() {
-  const handleNetworkChange = (online) => {
-    console.log(online ? "We just went online" : "We are offline");
+  const onFullS = (isFull) => {
+    console.log(isFull ? "We are full" : "We are small");
   };
-  const online = useNetwork(handleNetworkChange);
+  const { element, triggerFull, exitFull } = useFullScreen(onFullS);
   return (
     <div className="App">
-      <h1>{online ? "Online" : "Offline"}</h1>
+      <div ref={element}>
+        <img
+          src="https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/33039.png&w=350&h=254"
+          alt="mookie"
+        />
+        <button onClick={exitFull}>Exit Fullscreen</button>
+      </div>
+      <button onClick={triggerFull}>Make Fullscreen</button>
     </div>
   );
 }
