@@ -13,28 +13,36 @@
     <title>Moment Vanilla App</title>
   </head>
   <body>
-    <h2 id="clock">00:00</h2>
-    <form id="login-form" class="hidden">
-      <input
-        required
-        maxlength="15"
-        type="text"
-        placeholder="What is your name?"
-      />
-      <input type="submit" value="Login" />
-    </form>
-    <h1 id="greeting" class="hidden"></h1>
-    <form id="todo-form">
-      <input type="text" placeholder="Write a To Do and Press Enter" required />
-    </form>
-    <ul id="todo-list"></ul>
-    <div id="quote">
-      <span></span>
-      <span></span>
-    </div>
-    <div id="weather">
-      <span></span>
-      <span></span>
+    <div class="outer">
+      <div id="weather">
+        <span></span>
+        <span></span>
+      </div>
+      <h2 id="clock">00:00</h2>
+      <form id="login-form" class="hidden">
+        <input
+          required
+          maxlength="15"
+          type="text"
+          placeholder="Type Your Name 👻"
+          id="login-form-input"
+        />
+        <input type="submit" value="Login" class="hidden" />
+      </form>
+      <h1 id="greeting" class="hidden"></h1>
+      <form id="todo-form">
+        <input
+          type="text"
+          placeholder="Write Your To Do"
+          required
+          id="todo-form-input"
+        />
+      </form>
+      <ul id="todo-list"></ul>
+      <div id="quote">
+        <span></span>
+        <span></span>
+      </div>
     </div>
   </body>
 </html>
