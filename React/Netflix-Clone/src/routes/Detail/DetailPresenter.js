@@ -55,6 +55,8 @@ const Title = styled.h3`
 
 const ItemContainer = styled.div`
   margin: 20px 0px;
+  display: flex;
+  align-items: center;
 `;
 
 const Item = styled.span``;
@@ -68,6 +70,39 @@ const Overview = styled.p`
   opacity: 0.7;
   line-height: 1.5;
   width: 50%;
+`;
+
+const IMDBLink = styled.a`
+  margin-left: 10px;
+  background-color: #e2b615;
+  font-weight: 900;
+  border: none;
+  border-radius: 2px;
+  color: black;
+  padding: 1px;
+`;
+
+const Homepage = styled.a`
+  margin-left: 10px;
+  background-color: tomato;
+  color: black;
+  font-weight: 700;
+  border-radius: 2px;
+  padding: 1px;
+`;
+
+const YoutubeVideo = styled.iframe`
+  width: 50%;
+  height: 50%;
+  margin-top: 100px;
+`;
+
+const ProductCompany = styled.img`
+  margin-left: 10px;
+  width: 50px;
+  height: 14px;
+  background-color: white;
+  border-radius: 2px;
 `;
 
 const DetailPresenter = ({ result, loading, error }) =>
@@ -117,8 +152,38 @@ const DetailPresenter = ({ result, loading, error }) =>
                     : `${genre.name} / `
                 )}
             </Item>
+            {result.imdb_id && (
+              <IMDBLink
+                href={`https://www.imdb.com/title/${result.imdb_id}`}
+                target="_blank"
+              >
+                IMDb
+              </IMDBLink>
+            )}
+            {result.homepage && (
+              <Homepage href={result.homepage} target="_blank">
+                공식 홈페이지
+              </Homepage>
+            )}
+            {result.production_companies[0].logo_path ? (
+              <ProductCompany
+                src={`https://image.tmdb.org/t/p/w300${result.production_companies[0].logo_path}`}
+              />
+            ) : (
+              <p></p>
+            )}
           </ItemContainer>
           <Overview>{result.overview}</Overview>
+          {result.videos.results[0] ? (
+            <YoutubeVideo
+              type="text/html"
+              src={`https://www.youtube.com/embed/${result.videos.results[0].key}`}
+              frameBorder="0"
+              allowFullScreen
+            />
+          ) : (
+            <p></p>
+          )}
         </Data>
       </Content>
       {error && <Message color="#e74c3c" text={error} />}
