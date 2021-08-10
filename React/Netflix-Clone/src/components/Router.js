@@ -16,11 +16,11 @@ export default () => (
     <>
       <Header />
       <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/tv" component={TV} />
-        <Route path="/search" component={Search} />
-        <Route path="/movie/:id" component={Detail} />
-        <Route path="/show/:id" component={Detail} />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/tv" component={TV} />
+        <Route exact path="/search" component={Search} />
+        <Route exact path="/movie/:id" component={Detail} />
+        <Route exact path="/tv/:id" component={Detail} />
         <Redirect from="*" to="/" />
       </Switch>
     </>
