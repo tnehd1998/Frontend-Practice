@@ -23,42 +23,8 @@ const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error }) => (
         <Helmet>
           <title>홈 - 넷플릭스</title>
         </Helmet>
-        {nowPlaying && nowPlaying.length > 0 && (
-          <Section title="새로운 콘텐츠">
-            {nowPlaying.map((movie) => (
-              <Poster
-                key={movie.id}
-                id={movie.id}
-                imageUrl={movie.poster_path}
-                title={movie.title}
-                rating={movie.vote_average}
-                year={
-                  movie.release_date ? movie.release_date.substring(0, 4) : ""
-                }
-                isMovie={true}
-              />
-            ))}
-          </Section>
-        )}
-        {upcoming && upcoming.length > 0 && (
-          <Section title="지금 뜨는 콘텐츠">
-            {upcoming.map((movie) => (
-              <Poster
-                key={movie.id}
-                id={movie.id}
-                imageUrl={movie.poster_path}
-                title={movie.title}
-                rating={movie.vote_average}
-                year={
-                  movie.release_date ? movie.release_date.substring(0, 4) : ""
-                }
-                isMovie={true}
-              />
-            ))}
-          </Section>
-        )}
         {popular && popular.length > 0 && (
-          <Section title="인기 콘텐츠">
+          <Section title="인기 영화 콘텐츠">
             {popular.map((movie) => (
               <Poster
                 key={movie.id}
