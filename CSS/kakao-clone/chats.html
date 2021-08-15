@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="css/styles.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chats - Kakao Clone</title>
+</head>
+<body>
+    <div class="status-bar">
+        <div class="status-bar__column">
+            <span>No Service</span>
+            <i class="fas fa-wifi"></i>
+        </div>
+        <div class="status-bar__column">
+            <span>18:43</span>
+        </div>
+        <div class="status-bar__column">
+            <span>110%</span>
+            <i class="fas fa-battery-full fa-lg"></i>
+            <i class="fas fa-bolt"></i>
+        </div>
+    </div>
+
+    <header class="screen-header">
+        <h1 class="screen-header__title">Chats</h1>
+        <div class="screen-header__icons">
+            <span><i class="fas fa-search fa-lg"></i></span>
+            <span><i class="far fa-comment-dots fa-lg"></i></span>
+            <span><i class="fas fa-music fa-lg"></i></span>
+            <span><i class="fas fa-cog fa-lg"></i></span>
+        </div>
+    </header>
+
+    <main class="main-screen">
+        <a href="chat.html">
+            <div class="user-component">
+            <div class="user-component__column">
+                <img 
+                src="data:image/jpeg;base64,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"
+                class="user-component__avatar user-component__avatar"
+                />
+                <div class="user-component__text">
+                    <h4 class="user-component__title">Corey</h4>
+                    <h6 class="user-component__subtitle">
+                        Please check My Kakao Account Info
+                    </h6>
+                </div>
+            </div>
+            <div class="user-component__column">
+                <span class="user-component__time">21:22</span>
+                <div class="badge">1</div>
+            </div>
+            </div>
+        </a>
+    </main>
+
+
+    <nav class="nav">
+        <ul class="nav__list">
+            <li class="nav__btn">
+                <a class="nav__link" href="friends.html">
+                    <i class="far fa-user fa-2x"></i>
+                </a>
+            </li>
+            <li class="nav__btn"><a class="nav__link" href="chats.html">
+                <span class="nav__notification badge">1</span>
+                <i class="fas fa-comment fa-2x"></i>
+            </a>
+        </li>
+            <li class="nav__btn">
+                <a class="nav__link" href="find.html">
+                    <i class="fas fa-search fa-2x"></i>
+                </a>
+            </li>
+            <li class="nav__btn">
+                <a class="nav__link" href="more.html">
+                    <span class="nav__link__notification badge"></span>
+                    <i class="fas fa-ellipsis-h fa-2x"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="no-mobile">
+        <span>Your screen is too big ㅠㅠ</span>
+    </div>
+
+    <script 
+    src="https://kit.fontawesome.com/24da48332c.js" 
+    crossorigin="anonymous">
+    </script>
+</body>
+</html>
