@@ -179,7 +179,7 @@ async function goodDisplayUser() {
   updateUI(user, profile);
 }
 
-// Remove Duplicates!
+// Remove Duplicates! Set을 사용하여 중복을 방지함
 const array = ["🐶", "🐱", "🐨", "🐼", "🐱", "🐨"];
 console.log(array);
 console.log([...new Set(array)]);
