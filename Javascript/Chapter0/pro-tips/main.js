@@ -140,7 +140,7 @@ console.log(
 // ✅ Good Code
 console.log(`Hello ${student.name}, Your current score is: ${student.score}`);
 
-function greeting(sutdent) {
+function greeting(student) {
   const { name, score } = student;
   console.log(`Hello ${name}, Your current score is: ${score}`);
 }
