@@ -1,0 +1,56 @@
+* {
+  text-align: right;
+}
+
+body {
+  background-image: url("background.jpg");
+  background-size: cover;
+}
+
+h2,
+p {
+  color: tomato;
+  text-align: center;
+  border: 5px solid rgba(255, 176, 170, 0.5);
+  cursor: pointer;
+}
+
+p {
+  text-transform: uppercase;
+  line-height: 40px;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 100%;
+  font-family: "Yeon Sung", cursive;
+}
+
+img {
+  float: right;
+}
+
+footer {
+  clear: both;
+  text-align: center;
+  color: tomato;
+}
+
+li {
+  list-style: none;
+  display: inline-block;
+}
+
+.webText {
+  border: 5px dashed slateblue;
+}
+
+.active {
+  color: red;
+}
+
+#div1 {
+  background-color: tan;
+}
+
+#div2 {
+  background-color: turquoise;
+}
