@@ -1,0 +1,34 @@
+
+// Make a Calculator! using prompt(), and variables, make a program that does the following:
+// 1. Prompts the user for first number.
+// 2. Stores that first number
+// 3. Prompts the user for the second number.
+// 4. stores that number and responds with the SUM by using an alert.  
+
+var first = prompt("Enter your first number");
+var second = prompt("Enter your second number");
+var sum = Number(first)+Number(second);
+alert("The sum of first and second is : "+sum);
+
+// BONUS: Make a program that can subtract, multiply, and also divide!
+
+var first = prompt("Enter your first number");
+var second = prompt("Enter your second number");
+var fraction = prompt("Enter the fraction (+, -, *, /) ");
+switch(fraction){
+    case "+":
+    alert(Number(first)+Number(second));
+    break;
+     case "-":
+    alert(Number(first)-Number(second));
+    break;
+     case "*":
+    alert(Number(first)*Number(second));
+    break;
+     case "/":
+    alert(Number(first)/Number(second));
+    break;
+    default:
+    alert("Not a fraction");
+    break;
+}
