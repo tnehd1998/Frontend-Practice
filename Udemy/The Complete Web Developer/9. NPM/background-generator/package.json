@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "build": "browserify main.js > bundle.js && live-server"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
