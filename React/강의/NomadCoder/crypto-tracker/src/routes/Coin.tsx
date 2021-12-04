@@ -36,12 +36,19 @@ const Loader = styled.span`
   display: block;
 `;
 
+const GoBack = styled(Link)`
+  &:hover {
+    color: ${(props) => props.theme.accentColor};
+  }
+`;
+
 const Overview = styled.div`
   display: flex;
   justify-content: space-between;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 10px 20px;
   border-radius: 10px;
+  margin-top: 20px;
 `;
 const OverviewItem = styled.div`
   display: flex;
@@ -144,7 +151,9 @@ interface PriceData {
   };
 }
 
-const Coin = () => {
+interface ICoinProps {}
+
+const Coin = ({}: ICoinProps) => {
   const { coinId } = useParams<RouteParams>();
   const { state } = useLocation<RouteState>();
   const priceMatch = useRouteMatch("/:coinId/price");
@@ -177,6 +186,7 @@ const Coin = () => {
         <Loader>Loading...</Loader>
       ) : (
         <>
+          <GoBack to={"/"}>뒤로 가기</GoBack>
           <Overview>
             <OverviewItem>
               <span>Rank:</span>
