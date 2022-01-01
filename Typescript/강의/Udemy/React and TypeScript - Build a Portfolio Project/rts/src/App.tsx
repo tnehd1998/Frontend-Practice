@@ -1,5 +1,5 @@
 import React from "react";
-import UserSearch from "./state/UserSearch";
+import UserSearch from "./refs/UserSearch";
 
 const App: React.FC = () => {
   return (
