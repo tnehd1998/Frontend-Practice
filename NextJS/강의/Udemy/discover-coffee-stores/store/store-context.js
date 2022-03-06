@@ -9,10 +9,12 @@ export const ACTION_TYPE = {
 
 const storeReducer = (state, action) => {
   switch (action.type) {
-    case ACTION_TYPE.SET_LAT_LONG:
+    case ACTION_TYPE.SET_LAT_LONG: {
       return { ...state, latLong: action.payload.latLong };
-    case ACTION_TYPE.SET_COFFEE_STORE:
-      return { ...state, latLong: action.payload.coffeeStores };
+    }
+    case ACTION_TYPE.SET_COFFEE_STORE: {
+      return { ...state, coffeeStores: action.payload.coffeeStores };
+    }
     default:
       throw new Error(`Unhandled action type : ${action.type}`);
   }

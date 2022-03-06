@@ -1,11 +1,13 @@
 import Head from "next/head";
 import Image from "next/image";
-import { useContext, useEffect, useState } from "react";
+import styles from "../styles/Home.module.css";
+
 import Banner from "../components/Banner";
 import Card from "../components/Card";
-import useTrackLocation from "../hooks/use-track-location";
 import { fetchCoffeeStores } from "../lib/coffee-stores";
-import styles from "../styles/Home.module.css";
+
+import useTrackLocation from "../hooks/use-track-location";
+import { useContext, useEffect, useState } from "react";
 import { ACTION_TYPE, StoreContext } from "../store/store-context";
 
 export async function getStaticProps(context) {
@@ -18,37 +20,40 @@ export async function getStaticProps(context) {
   };
 }
 
-export default function Home({ coffeeStores }) {
+export default function Home(props) {
   const { handleTrackLocation, locationErrorMsg, isFindingLocation } =
     useTrackLocation();
+  const [coffeeStoresError, setCoffeeStoresError] = useState(null);
+  const { dispatch, state } = useContext(StoreContext);
+  const { coffeeStores, latLong } = state;
+
+  useEffect(() => {
+    const setCoffeeStoresByLocation = async () => {
+      if (latLong) {
+        try {
+          const response = await fetch(
+            `/api/getCoffeeStoresByLocation?latLong=${latLong}&limit=30`
+          );
+          const coffeeStores = await response.json();
+
+          dispatch({
+            type: ACTION_TYPE.SET_COFFEE_STORE,
+            payload: {
+              coffeeStores,
+            },
+          });
+          setCoffeeStoresError("");
+        } catch (error) {
+          setCoffeeStoresError(error.message);
+        }
+      }
+    };
+    setCoffeeStoresByLocation();
+  }, [latLong, dispatch]);
 
   const handleOnBannerBtnClick = () => {
-    console.log("Clicked Banner Button");
     handleTrackLocation();
   };
-
-  //const [coffeeStoresNearMe, setCoffeeStoresNearMe] = useState("");
-  const [coffeeStoresNearMeError, setCoffeeStoresNearMeError] = useState(null);
-  const { dispatch, state } = useContext(StoreContext);
-  const { coffeeStores: coffeeStoresNearMe, latLong } = state;
-
-  useEffect(async () => {
-    if (latLong) {
-      try {
-        const fetchedCoffeeStores = await fetchCoffeeStores(latLong, 30);
-        dispatch({
-          type: ACTION_TYPE.SET_COFFEE_STORE,
-          payload: {
-            coffeeStores: fetchedCoffeeStores,
-          },
-        });
-      } catch (error) {
-        setCoffeeStoresNearMeError(error.message);
-      }
-    }
-  }, [latLong]);
-
-  console.log(coffeeStoresNearMe);
 
   return (
     <div className={styles.container}>
@@ -64,17 +69,15 @@ export default function Home({ coffeeStores }) {
           handleOnClick={handleOnBannerBtnClick}
         />
         {locationErrorMsg && <p>Something went wrong : {locationErrorMsg}</p>}
-        {coffeeStoresNearMeError && (
-          <p>Something went wrong : {coffeeStoresNearMeError}</p>
-        )}
+        {coffeeStoresError && <p>Something went wrong : {coffeeStoresError}</p>}
         <div className={styles.heroImage}>
           <Image src="/static/hero-image.png" width={700} height={400} />
         </div>
-        {coffeeStoresNearMe.length > 0 && (
+        {coffeeStores.length > 0 && (
           <div className={styles.sectionWrapper}>
             <h2 className={styles.heading2}>Stores Near Me</h2>
             <div className={styles.cardLayout}>
-              {coffeeStoresNearMe.map((coffeeStore) => (
+              {coffeeStores.map((coffeeStore) => (
                 <Card
                   key={coffeeStore.id}
                   name={coffeeStore.name}
@@ -89,11 +92,11 @@ export default function Home({ coffeeStores }) {
             </div>
           </div>
         )}
-        {coffeeStores && (
+        {props.coffeeStores.length > 0 && (
           <div className={styles.sectionWrapper}>
             <h2 className={styles.heading2}>Toronto Stores</h2>
             <div className={styles.cardLayout}>
-              {coffeeStores.map((coffeeStore) => (
+              {props.coffeeStores.map((coffeeStore) => (
                 <Card
                   key={coffeeStore.id}
                   name={coffeeStore.name}
