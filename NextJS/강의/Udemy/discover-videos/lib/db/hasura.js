@@ -1,9 +1,55 @@
-export async function queryHasuraGQL(operationsDoc, operationName, variables) {
+export async function createNewUser(token, metadata) {
+  const operationsDoc = `
+  mutation createNewUser($issuer: String!, $email: String!, $publicAddress: String!) {
+    insert_users(objects: {email: $email, issuer: $issuer, publicAddress: $publicAddress}) {
+      returning {
+        email
+        id
+        issuer
+      }
+    }
+  }
+`;
+
+  const { issuer, email, publicAddress } = metadata;
+  const response = await queryHasuraGQL(
+    operationsDoc,
+    "createNewUser",
+    { issuer, email, publicAddress },
+    token
+  );
+
+  console.log({ response, issuer });
+  return response;
+}
+
+export async function isNewUser(token, issuer) {
+  const operationsDoc = `
+    query isNewUser($issuer: String!) {
+      users(where: {issuer: {_eq: $issuer}}) {
+        id
+        email
+        issuer
+      }
+    }
+  `;
+
+  const response = await queryHasuraGQL(
+    operationsDoc,
+    "isNewUser",
+    { issuer },
+    token
+  );
+
+  return response?.data?.users?.length === 0;
+}
+
+async function queryHasuraGQL(operationsDoc, operationName, variables, token) {
   const result = await fetch(process.env.NEXT_PUBLIC_HASURA_ADMIN_URL, {
     method: "POST",
     headers: {
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6ImJpbGx5IiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE2NDc5NjgzNjcsImh0dHBzOi8vaGFzdXJhLmlvL2p3dC9jbGFpbXMiOnsieC1oYXN1cmEtYWxsb3dlZC1yb2xlcyI6WyJ1c2VyIiwiYWRtaW4iXSwieC1oYXN1cmEtZGVmYXVsdC1yb2xlIjoidXNlciIsIngtaGFzdXJhLXVzZXItaWQiOiJiaWxseSJ9fQ.Jf7rBQzYmhbN8lfrYtlcXe-Pi10tmOazAkQREkVX-J8",
+      Authorization: `Bearer ${token}`,
+      "Content-type": "application/json",
     },
     body: JSON.stringify({
       query: operationsDoc,
@@ -14,14 +60,3 @@ export async function queryHasuraGQL(operationsDoc, operationName, variables) {
 
   return await result.json();
 }
-
-const operationsDoc = `
-    query MyQuery {
-      users {
-        email
-        id
-        issuer
-        publicAddress
-      }
-    }
-  `;
