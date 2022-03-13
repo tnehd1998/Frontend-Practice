@@ -4,20 +4,14 @@ import styles from "../../styles/Video.module.css";
 import cls from "classnames";
 import { getYoutubeVideoById } from "../../lib/videos";
 import NavBar from "../../components/Nav/Navbar";
+import Like from "../../components/Icons/LikeIcon";
+import DisLike from "../../components/Icons/DislikeIcon";
+import { useEffect, useState } from "react";
 
 Modal.setAppElement("#__next");
 
 export async function getStaticProps(context) {
-  //   const video = {
-  //     title: "Hi cute dog",
-  //     publishTime: "2022-03-10",
-  //     description: "A big red dog that is super cute",
-  //     channelTitle: "Paramount Pictures",
-  //     viewCount: 10000,
-  //   };
-
   const videoId = context.params.videoId;
-
   const videoArray = await getYoutubeVideoById(videoId);
 
   return {
@@ -30,7 +24,6 @@ export async function getStaticProps(context) {
 
 export async function getStaticPaths() {
   const listOfVideos = ["NPhWK2HEv3U", "fs7k6VIXcAQ", "uJgs7gXaIas"];
-
   const paths = listOfVideos.map((videoId) => ({
     params: { videoId },
   }));
@@ -39,6 +32,9 @@ export async function getStaticPaths() {
 }
 
 const Video = ({ video }) => {
+  const [toggleLike, setToggleLike] = useState(false);
+  const [toggleDisLike, setToggleDisLike] = useState(false);
+
   const router = useRouter();
   const { videoId } = router.query;
 
@@ -49,6 +45,53 @@ const Video = ({ video }) => {
     channelTitle,
     statistics: { viewCount } = { viewCount: 0 },
   } = video;
+
+  useEffect(async () => {
+    const response = await fetch(`/api/stats?videoId=${videoId}`, {
+      method: "GET",
+    });
+    const data = await response.json();
+
+    if (data.length > 0) {
+      const favourited = data[0].favourited;
+      if (favourited === 1) {
+        setToggleLike(true);
+      } else if (favourited === 0) {
+        setToggleDisLike(true);
+      }
+    }
+  }, []);
+
+  const runRatingService = async (favourited) => {
+    return await fetch("/api/stats", {
+      method: "POST",
+      body: JSON.stringify({
+        videoId,
+        favourited,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
+
+  const handleToggleLike = async () => {
+    const val = !toggleLike;
+    setToggleLike(val);
+    setToggleDisLike(toggleLike);
+
+    const favourited = val ? 1 : 0;
+    await runRatingService(favourited);
+  };
+
+  const handleToggleDislike = async () => {
+    const val = !toggleDisLike;
+    setToggleDisLike(val);
+    setToggleLike(toggleDisLike);
+
+    const favourited = val ? 0 : 1;
+    await runRatingService(favourited);
+  };
 
   return (
     <div className={styles.container}>
@@ -69,7 +112,20 @@ const Video = ({ video }) => {
           src={`https://www.youtube.com/embed/${videoId}?autoplay=0&origin=http://example.com&controls=0&rel=1`}
           frameborder="0"
         ></iframe>
-
+        <div className={styles.likeDislikeBtnWrapper}>
+          <div className={styles.likeBtnWrapper}>
+            <button onClick={handleToggleLike}>
+              <div className={styles.btnWrapper}>
+                <Like selected={toggleLike} />
+              </div>
+            </button>
+          </div>
+          <button onClick={handleToggleDislike}>
+            <div className={styles.btnWrapper}>
+              <DisLike selected={toggleDisLike} />
+            </div>
+          </button>
+        </div>
         <div className={styles.modalBody}>
           <div className={styles.modalBodyContent}>
             <div className={styles.col1}>
