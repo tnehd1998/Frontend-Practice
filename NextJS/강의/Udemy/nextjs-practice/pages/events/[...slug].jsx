@@ -5,9 +5,10 @@ import ResultsTitle from "../../components/events/ResultsTitle";
 import Button from "../../components/ui/Button";
 import ErrorAlert from "../../components/ui/ErrorAlert";
 import useSWR from "swr";
+import Head from "next/head";
 
 const FilteredEventsPage = () => {
-  const [loadedEvents, setLoadedEvents] = useState([]);
+  const [loadedEvents, setLoadedEvents] = useState();
   const router = useRouter();
 
   const filterData = router.query.slug;
@@ -29,12 +30,29 @@ const FilteredEventsPage = () => {
     }
   }, [data]);
 
+  let pageHeadData;
+
   if (!loadedEvents) {
-    return <p className="center">Loading...</p>;
+    return (
+      <Fragment>
+        {pageHeadData}
+        <p className="center">Loading...</p>
+      </Fragment>
+    );
   }
 
   const filteredYear = +filterData[0];
   const filteredMonth = +filterData[1];
+
+  pageHeadData = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta
+        name="description"
+        content={`All events for ${filteredYear}/${filteredMonth}`}
+      />
+    </Head>
+  );
 
   if (
     isNaN(filteredYear) ||
@@ -68,6 +86,7 @@ const FilteredEventsPage = () => {
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <Fragment>
+        {pageHeadData}
         <ErrorAlert>
           <p>No events found for the chosen filter!</p>
         </ErrorAlert>
@@ -82,6 +101,7 @@ const FilteredEventsPage = () => {
 
   return (
     <Fragment>
+      {pageHeadData}
       <ResultsTitle date={newDate} />
       <EventList items={filteredEvents} />
     </Fragment>
