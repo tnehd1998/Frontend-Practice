@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import EventContent from "../../components/event-detail/event-content";
 import EventLogistics from "../../components/event-detail/event-logistics";
 import EventSummary from "../../components/event-detail/event-summary";
+import Comments from "../../components/input/Comments";
 import ErrorAlert from "../../components/ui/ErrorAlert";
 import { getEventById, getFeaturedEvents } from "../../helpers/api-util";
 
@@ -33,6 +34,7 @@ const EventDetailPage = ({ selectedEvent }) => {
       <EventContent>
         <p>{event.description}</p>
       </EventContent>
+      <Comments eventId={event.id} />
     </Fragment>
   );
 };
