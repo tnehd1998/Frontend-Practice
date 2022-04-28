@@ -1,10 +1,5 @@
-import { useQuery, gql, ApolloClient, InMemoryCache } from "@apollo/client";
-import { useState } from "react";
-
-const client = new ApolloClient({
-  cache: new InMemoryCache(),
-  uri: "https://countries.trevorblades.com",
-});
+import { useQuery, gql } from "@apollo/client";
+import { useNavigate } from "react-router";
 
 const LIST_COUNTRIES = gql`
   {
@@ -29,10 +24,12 @@ interface ICountries {
 }
 
 const Home = () => {
-  const [country, setCountry] = useState("KR");
-  const { data, loading, error } = useQuery<ICountries>(LIST_COUNTRIES, {
-    client,
-  });
+  const { data, loading, error } = useQuery<ICountries>(LIST_COUNTRIES);
+  const navigate = useNavigate();
+
+  const onClickCountry = (countryCode: string) => {
+    navigate(`/country/${countryCode}`);
+  };
 
   if (loading || error) {
     return <p>{error ? error.message : "Loading..."}</p>;
@@ -43,7 +40,7 @@ const Home = () => {
       {data?.countries.map((country) => (
         <div key={country.code}>
           {country.capital ? (
-            <div>
+            <div onClick={() => onClickCountry(country.code)}>
               <h1>나라 이름 : {country.name}</h1>
               <h3>수도 : {country.capital}</h3>
               <p>나라 코드 명 : {country.code}</p>

@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Country from "./pages/Country";
 import Home from "./pages/Home";
 
 const App = () => {
@@ -6,6 +7,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/country/:countryCode" element={<Country />} />
       </Routes>
     </BrowserRouter>
   );
