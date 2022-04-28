@@ -1,8 +1,8 @@
 import { useQuery, gql } from "@apollo/client";
 import { useNavigate } from "react-router";
 
-const LIST_COUNTRIES = gql`
-  {
+const GET_COUNTRIES = gql`
+  query GetCountries {
     countries {
       name
       code
@@ -24,7 +24,7 @@ interface ICountries {
 }
 
 const Home = () => {
-  const { data, loading, error } = useQuery<ICountries>(LIST_COUNTRIES);
+  const { data, loading, error } = useQuery<ICountries>(GET_COUNTRIES);
   const navigate = useNavigate();
 
   const onClickCountry = (countryCode: string) => {
@@ -40,7 +40,15 @@ const Home = () => {
       {data?.countries.map((country) => (
         <div key={country.code}>
           {country.capital ? (
-            <div onClick={() => onClickCountry(country.code)}>
+            <div
+              style={{
+                border: "1px solid black",
+                padding: "10px",
+                margin: "10px",
+                cursor: "pointer",
+              }}
+              onClick={() => onClickCountry(country.code)}
+            >
               <h1>나라 이름 : {country.name}</h1>
               <h3>수도 : {country.capital}</h3>
               <p>나라 코드 명 : {country.code}</p>
