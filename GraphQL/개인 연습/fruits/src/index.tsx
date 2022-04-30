@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  uri: "https://fruits-api.netlify.app/graphql",
+  uri: "http://localhost:9000/graphql",
 });
 
 root.render(

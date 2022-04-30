@@ -1,5 +1,6 @@
 import { useQuery, gql } from "@apollo/client";
 import React from "react";
+import { useNavigate } from "react-router";
 
 const GET_FRUITS = gql`
   query allFruits {
@@ -32,16 +33,22 @@ interface IFruits {
 }
 
 const Home = () => {
+  const navigate = useNavigate();
   const { data, loading, error } = useQuery<IFruits>(GET_FRUITS);
 
   if (loading || error) {
     return <p>{error ? error.message : "Loading..."}</p>;
   }
 
+  const onClickFruit = (id: string) => {
+    navigate(`/fruit/${id}`);
+  };
+
   return (
     <div>
       {data?.fruits.map((fruit) => (
         <div
+          onClick={() => onClickFruit(fruit.id)}
           key={fruit.id}
           style={{
             border: "1px solid black",
@@ -55,8 +62,8 @@ const Home = () => {
           <p>Description : {fruit.description}</p>
           <div>
             <h3>Producing Country</h3>
-            {fruit.producing_countries.map((country) => (
-              <p>{country.country}</p>
+            {fruit.producing_countries.map((country, index) => (
+              <p key={index}>{country.country}</p>
             ))}
           </div>
         </div>
