@@ -1,4 +1,4 @@
-import { useQuery, gql } from "@apollo/client";
+import { useQuery, gql, useMutation } from "@apollo/client";
 import { useNavigate } from "react-router";
 
 const GET_FRUITS = gql`
@@ -11,6 +11,14 @@ const GET_FRUITS = gql`
       producing_countries {
         country
       }
+    }
+  }
+`;
+
+const DELETE_FRUIT = gql`
+  mutation deleteFruit($id: ID!) {
+    deleteFruit(id: $id) {
+      fruit_name
     }
   }
 `;
@@ -32,14 +40,28 @@ interface IFruits {
 }
 
 const Home = () => {
-  const navigate = useNavigate();
-  const { data, loading, error } = useQuery<IFruits>(GET_FRUITS);
+  const postFruitCompleted = () => {
+    console.log("Fruit Deleted");
+    refetch();
+  };
 
-  console.log(data);
+  const { data, loading, error, refetch } = useQuery<IFruits>(GET_FRUITS);
+  const [deleteFruit] = useMutation(DELETE_FRUIT, {
+    onCompleted: postFruitCompleted,
+  });
+  const navigate = useNavigate();
 
   if (loading || error) {
     return <p>{error ? error.message : "Loading..."}</p>;
   }
+
+  const onClickDeleteFruit = (id: string) => {
+    deleteFruit({
+      variables: {
+        id,
+      },
+    });
+  };
 
   const onClickAddFruit = () => {
     navigate("/add");
@@ -63,6 +85,7 @@ const Home = () => {
             cursor: "pointer",
           }}
         >
+          <button onClick={() => onClickDeleteFruit(fruit.id)}>삭제</button>
           <h1>Fruit Name : {fruit.fruit_name}</h1>
           <h2>Scientific Name : {fruit.scientific_name}</h2>
           <p>Description : {fruit.description}</p>
