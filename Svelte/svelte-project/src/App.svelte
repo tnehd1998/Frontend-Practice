@@ -8,9 +8,11 @@
 
   let posts = data.data;
 
+  let arrayInc = 3;
+
   function addPost(author, date, post) {
     const newPost = {
-      id: posts.length + 1,
+      id: ++arrayInc,
       author,
       date,
       post,
@@ -24,6 +26,12 @@
     post = "";
 
     navigate("/posts");
+  }
+
+  function deletePost(id) {
+    const deleteIndex = posts.findIndex((post) => post.id === id);
+    posts.splice(deleteIndex, 1);
+    posts = posts;
   }
 </script>
 
@@ -39,7 +47,7 @@
     <Route path="posts">
       <div class="overflow-auto space-y-4 p-4">
         {#each posts as post}
-          <Post {...post} />
+          <Post {deletePost} {...post} />
         {/each}
       </div>
     </Route>
