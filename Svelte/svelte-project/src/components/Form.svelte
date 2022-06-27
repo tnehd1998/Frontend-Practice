@@ -1,14 +1,28 @@
 <script>
-  export let addPost;
+  import { posts } from "../stores";
+  import { navigate } from "svelte-navigator";
   let author = "";
   let date = "";
   let post = "";
 
-  function sendAddPost() {
-    addPost(author, date, post);
+  let arrayInc = 3;
+
+  function addPost() {
+    const newPost = {
+      id: ++arrayInc,
+      author,
+      date,
+      post,
+    };
+
+    $posts.push(newPost);
+    $posts = $posts;
+
     author = "";
     date = "";
     post = "";
+
+    navigate("/posts");
   }
 </script>
 
@@ -41,5 +55,5 @@
     name="post"
     class="textarea h-24 textarea-bordered-none "
   />
-  <button on:click={sendAddPost} class="btn btn-primary">Submit</button>
+  <button on:click={addPost} class="btn btn-primary">Submit</button>
 </div>
