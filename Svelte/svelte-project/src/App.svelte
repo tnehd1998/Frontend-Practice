@@ -1,8 +1,10 @@
 <script>
+  import { Router, Route, navigate } from "svelte-navigator";
   import data from "./data.json";
   import Post from "./components/Post.svelte";
   import Form from "./components/Form.svelte";
-  import Header from "./components/Header.svelte";
+  import About from "./components/About.svelte";
+  import Nav from "./components/Nav.svelte";
 
   let posts = data.data;
 
@@ -20,18 +22,29 @@
     author = "";
     date = "";
     post = "";
+
+    navigate("/posts");
   }
 </script>
 
-<main class="flex flex-col justify-center items-center h-screen space-y-4">
-  <Header name="Billy" text="FE Developer" />
-  <Form {addPost} />
-  <div class="overflow-auto space-y-4 p-4">
-    {#each posts as post}
-      <Post {...post} />
-    {/each}
-  </div>
-</main>
+<Router>
+  <main class="flex flex-col justify-center items-center h-screen space-y-4">
+    <Nav />
+    <Route>
+      <Form {addPost} />
+    </Route>
+    <Route path="/about">
+      <About name="Billy" text="FE Developer" />
+    </Route>
+    <Route path="posts">
+      <div class="overflow-auto space-y-4 p-4">
+        {#each posts as post}
+          <Post {...post} />
+        {/each}
+      </div>
+    </Route>
+  </main>
+</Router>
 
 <style>
 </style>
