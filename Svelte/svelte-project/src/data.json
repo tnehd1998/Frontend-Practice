@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "author": "Billy",
+      "date": "22/06/27",
+      "post": "This is text"
+    },
+    {
+      "id": 2,
+      "author": "Brian",
+      "date": "22/06/27",
+      "post": "This is my text"
+    },
+    {
+      "id": 3,
+      "author": "Charlie",
+      "date": "22/06/27",
+      "post": "This is random text"
+    }
+  ]
+}
